@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>To-Do List Modern</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Background dinamis -->
+  <div id="background"></div>
+
+  <div class="container">
+    <section id="loginSection" class="card">
+      <h2>Login To-Do List</h2>
+      <div class="form-group">
+        <input type="text" id="username" placeholder="Username (user1 - user28)" />
+        <input type="password" id="password" placeholder="Password (123)" />
+        <button id="loginBtn">Masuk</button>
+      </div>
+    </section>
+
+    <section id="todoSection" class="card hidden">
+      <div class="header">
+        <h2>Halo, <span id="userDisplay"></span> 👋</h2>
+        <button id="logoutBtn" class="logout-btn">Logout</button>
+      </div>
+
+      <div class="form-group task-form">
+        <input type="text" id="taskInput" placeholder="Tugas baru..." />
+        <input type="date" id="deadlineInput" />
+        <button id="addTaskBtn">Tambah</button>
+      </div>
+
+      <div class="form-group">
+        <label for="filterSelect">Filter tugas:</label>
+        <select id="filterSelect">
+          <option value="all">Semua</option>
+          <option value="uncompleted">Belum Selesai</option>
+          <option value="completed">Selesai</option>
+        </select>
+      </div>
+
+      <ul id="taskList"></ul>
+      <div id="taskCount" class="task-count"></div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+
+  <!-- Script tambahan untuk ganti background -->
+  <script>
+    const loginSection = document.getElementById("loginSection");
+    const todoSection = document.getElementById("todoSection");
+    const background = document.getElementById("background");
+
+    function updateBackground() {
+      if (!todoSection.classList.contains("hidden")) {
+        background.style.backgroundImage = "url('img/dashboard-bg.jpg')";
+      } else {
+        background.style.backgroundImage = "url('img/login-bg.png')";
+      }
+    }
+
+    updateBackground();
+    const observer = new MutationObserver(updateBackground);
+    observer.observe(todoSection, { attributes: true, attributeFilter: ['class'] });
+  </script>
+
+</body>
+</html>
